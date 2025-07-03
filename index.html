@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fluent UI Login</title>
+  <title>Fluent UI Login & Shop</title>
   <style>
     :root {
-      --bg-light: #f3f3f3;
-      --bg-dark: #1f1f1f;
-      --card-light: rgba(255, 255, 255, 0.7);
-      --card-dark: rgba(30, 30, 30, 0.7);
+      --bg-light: url('https://i.imgur.com/I5VZ4RW.jpg'); /* light bg */
+      --bg-dark: url('https://i.imgur.com/fshhORl.jpg');  /* dark bg */
+      --card-light: rgba(255, 255, 255, 0.8);
+      --card-dark: rgba(30, 30, 30, 0.8);
       --text-light: #000;
       --text-dark: #fff;
     }
@@ -17,12 +17,17 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-      transition: 0.3s;
-      background-image: url('https://i.imgur.com/xgB4A2C.jpg');
+      background-image: var(--bg-light);
       background-size: cover;
-      backdrop-filter: blur(8px);
+      background-position: center;
+      backdrop-filter: blur(6px);
+      color: var(--text-light);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-theme {
+      background-image: var(--bg-dark);
+      color: var(--text-dark);
     }
 
     .container {
@@ -35,9 +40,12 @@
       transition: 0.3s;
     }
 
+    .dark-theme .container {
+      background: var(--card-dark);
+    }
+
     h2 {
       text-align: center;
-      margin-bottom: 20px;
     }
 
     input, select, button {
@@ -78,15 +86,35 @@
       color: white;
     }
 
-    #logoutSection {
+    #logoutSection, #shop {
       display: none;
-      text-align: center;
     }
 
-    .dark-theme {
-      --bg-light: #1f1f1f;
-      --card-light: rgba(30, 30, 30, 0.7);
-      --text-light: #fff;
+    /* SHOP UI */
+    #shop {
+      padding: 20px;
+      max-width: 800px;
+      margin: 5vh auto;
+      background: var(--card-light);
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+
+    .dark-theme #shop {
+      background: var(--card-dark);
+    }
+
+    .shop-item {
+      background: rgba(255,255,255,0.3);
+      margin: 10px;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .dark-theme .shop-item {
+      background: rgba(50, 50, 50, 0.4);
     }
   </style>
 </head>
@@ -114,7 +142,7 @@
     </div>
 
     <div class="tabs">
-      <button class="active" onclick="openSettings()">⚙️ Settings</button>
+      <button onclick="openSettings()">⚙️ Settings</button>
     </div>
 
     <div id="settingsPanel" style="margin-top:15px; display:none;">
@@ -130,6 +158,14 @@
         <option value="th">ไทย</option>
       </select>
     </div>
+  </div>
+
+  <!-- SHOP SECTION -->
+  <div id="shop">
+    <h2>🛒 ร้านค้า</h2>
+    <div class="shop-item">🎮 สกินดาบ - 100 โกลด์</div>
+    <div class="shop-item">🧥 ชุดนักรบ - 200 โกลด์</div>
+    <div class="shop-item">🐉 พาหนะมังกร - 500 โกลด์</div>
   </div>
 
   <script>
@@ -159,14 +195,15 @@
       const pass = document.getElementById("password").value;
       if (user && pass) {
         localStorage.setItem("user", user);
-        document.getElementById("welcomeText").textContent = `${texts[currentLang].welcome} ${user}`;
-        document.getElementById("loginForm").style.display = "none";
-        document.getElementById("logoutSection").style.display = "block";
+        document.getElementById("app").style.display = "none";
+        document.getElementById("shop").style.display = "block";
       }
     }
 
     function logout() {
       localStorage.removeItem("user");
+      document.getElementById("shop").style.display = "none";
+      document.getElementById("app").style.display = "block";
       document.getElementById("logoutSection").style.display = "none";
       document.getElementById("loginForm").style.display = "block";
     }
