@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8" />
-    <title>ส่งงานนักเรียน</title>
+  <meta charset="UTF-8">
+  <title>ส่งงานนักเรียน</title>
 </head>
 <body>
-    <h1>ส่งงานนักเรียน</h1>
-    <form action="sendfile.php" method="POST" enctype="multipart/form-data">
-        ชื่อ: <input type="text" name="student_name" required><br><br>
-        เลือกไฟล์งาน: <input type="file" name="file" required><br><br>
-        <button type="submit">ส่งงาน</button>
-    </form>
+  <h1>ส่งงานนักเรียน</h1>
+
+  <form action="https://formspree.io/f/mvgrywqa" method="POST" enctype="multipart/form-data">
+    ชื่อ: <input type="text" name="name" required><br><br>
+    อีเมล: <input type="email" name="email" required><br><br>
+    แนบไฟล์: <input type="file" name="file" required><br><br>
+    <button type="submit">ส่งงาน</button>
+  </form>
 </body>
 </html>
