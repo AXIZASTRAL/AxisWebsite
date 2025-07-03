@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $student_name = htmlspecialchars($_POST['student_name']);
-    $to = "your-email@example.com";  // เปลี่ยนเป็นอีเมลคุณ
+    $to = "apirakinnu94@gmail.com";  // เปลี่ยนเป็นอีเมลคุณ
     $subject = "ส่งงานจาก: " . $student_name;
     $message = "นักเรียนชื่อ $student_name ส่งงานมาให้ครับ";
 
