@@ -1,281 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fluent UI Login & Shop</title>
+  <meta charset="UTF-8">
+  <title>Fluent Login System</title>
+  <link href="https://unpkg.com/@fluentui/web-components" rel="stylesheet">
   <style>
-    :root {
-      --bg-light: url('https://i.imgur.com/I5VZ4RW.jpg'); /* light bg */
-      --bg-dark: url('https://i.imgur.com/fshhORl.jpg');  /* dark bg */
-      --card-light: rgba(255, 255, 255, 0.8);
-      --card-dark: rgba(30, 30, 30, 0.8);
-      --text-light: #000;
-      --text-dark: #fff;
-    }
-
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-image: var(--bg-light);
-      background-size: cover;
-      background-position: center;
-      backdrop-filter: blur(6px);
-      color: var(--text-light);
-      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #1f1f1f, #2a2a72);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
-
-    body.dark-theme {
-      background-image: var(--bg-dark);
-      color: var(--text-dark);
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      width: 300px;
     }
-
-    .container {
-      max-width: 400px;
-      margin: 10vh auto;
-      padding: 30px;
-      border-radius: 20px;
-      background: var(--card-light);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      transition: 0.3s;
+    input, button {
+      width: 100%;
+      margin-bottom: 1rem;
     }
-
-    .dark-theme .container {
-      background: var(--card-dark);
-    }
-
     h2 {
       text-align: center;
-    }
-
-    input, select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-    }
-
-    button {
-      background: #0078d4;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      background: #005ea0;
-    }
-
-    .tabs {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    .tabs button {
-      flex: 1;
-      margin: 2px;
-      background: #e1e1e1;
-      color: #000;
-    }
-
-    .tabs button.active {
-      background: #0078d4;
-      color: white;
-    }
-
-    #logoutSection, #shop {
-      display: none;
-    }
-
-    /* SHOP UI */
-    #shop {
-      padding: 20px;
-      max-width: 800px;
-      margin: 5vh auto;
-      background: var(--card-light);
-      border-radius: 20px;
-      transition: 0.3s;
-    }
-
-    .dark-theme #shop {
-      background: var(--card-dark);
-    }
-
-    .shop-item {
-      background: rgba(255,255,255,0.3);
-      margin: 10px;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: 0.3s;
-    }
-
-    .dark-theme .shop-item {
-      background: rgba(50, 50, 50, 0.4);
     }
   </style>
 </head>
 <body>
-  <div class="container" id="app">
-    <h2 id="title">Login</h2>
-
-    <div id="loginForm">
-      <input type="text" id="username" placeholder="Username" />
-      <input type="password" id="password" placeholder="Password" />
-      <button onclick="login()">Login</button>
-      <button onclick="switchTab('register')">Create Account</button>
-    </div>
-
-    <div id="registerForm" style="display:none">
-      <input type="text" id="newUsername" placeholder="New Username" />
-      <input type="password" id="newPassword" placeholder="New Password" />
-      <button onclick="register()">Register</button>
-      <button onclick="switchTab('login')">Back to Login</button>
-    </div>
-
-    <div id="logoutSection">
-      <p id="welcomeText">Welcome!</p>
-      <button onclick="logout()">Logout</button>
-    </div>
-
-    <div class="tabs">
-      <button onclick="openSettings()">⚙️ Settings</button>
-    </div>
-
-    <div id="settingsPanel" style="margin-top:15px; display:none;">
-      <label>Theme:</label>
-      <select id="themeSelect" onchange="changeTheme()">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-
-      <label>Language:</label>
-      <select id="langSelect" onchange="changeLanguage()">
-        <option value="en">English</option>
-        <option value="th">ไทย</option>
-      </select>
-    </div>
+  <div class="card">
+    <h2>เข้าสู่ระบบ</h2>
+    <input id="login-username" type="text" placeholder="ชื่อผู้ใช้" />
+    <input id="login-password" type="password" placeholder="รหัสผ่าน" />
+    <button onclick="login()">เข้าสู่ระบบ</button>
+    <hr>
+    <h2>ลงทะเบียน</h2>
+    <input id="register-username" type="text" placeholder="ชื่อผู้ใช้ใหม่" />
+    <input id="register-password" type="password" placeholder="รหัสผ่านใหม่" />
+    <button onclick="register()">ลงทะเบียน</button>
+    <p id="message"></p>
   </div>
 
-  <!-- SHOP SECTION -->
-  <div id="shop">
-  <h2 style="text-align:center;">🛒 ร้านค้า</h2>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-    
-    <!-- ITEM 1 -->
-    <div class="shop-item">
-      <img src="https://i.imgur.com/Fda2Sji.png" alt="ดาบ" style="width: 120px; height: 120px;" />
-      <h3>สกินดาบ</h3>
-      <p>💰 100 โกลด์</p>
-    </div>
-
-    <!-- ITEM 2 -->
-    <div class="shop-item">
-      <img src="https://i.imgur.com/hyZ4nGx.png" alt="เกราะ" style="width: 120px; height: 120px;" />
-      <h3>ชุดนักรบ</h3>
-      <p>💰 200 โกลด์</p>
-    </div>
-
-    <!-- ITEM 3 -->
-    <div class="shop-item">
-      <img src="https://i.imgur.com/rWnRUXj.png" alt="มังกร" style="width: 120px; height: 120px;" />
-      <h3>พาหนะมังกร</h3>
-      <p>💰 500 โกลด์</p>
-    </div>
-
-  </div>
-  </div>
-
-  <script>
-    let currentLang = 'en';
-
-    const texts = {
-      en: {
-        login: "Login",
-        createAccount: "Create Account",
-        username: "Username",
-        password: "Password",
-        welcome: "Welcome!",
-        back: "Back to Login",
-      },
-      th: {
-        login: "เข้าสู่ระบบ",
-        createAccount: "สร้างบัญชี",
-        username: "ชื่อผู้ใช้",
-        password: "รหัสผ่าน",
-        welcome: "ยินดีต้อนรับ!",
-        back: "กลับไปหน้าล็อกอิน",
-      },
-    };
-
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      if (user && pass) {
-        localStorage.setItem("user", user);
-        document.getElementById("app").style.display = "none";
-        document.getElementById("shop").style.display = "block";
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem("user");
-      document.getElementById("shop").style.display = "none";
-      document.getElementById("app").style.display = "block";
-      document.getElementById("logoutSection").style.display = "none";
-      document.getElementById("loginForm").style.display = "block";
-    }
-
-    function register() {
-      const newUser = document.getElementById("newUsername").value;
-      const newPass = document.getElementById("newPassword").value;
-      if (newUser && newPass) {
-        alert("บัญชีถูกสร้างแล้ว: " + newUser);
-        switchTab('login');
-      }
-    }
-
-    function switchTab(tab) {
-      const loginForm = document.getElementById("loginForm");
-      const registerForm = document.getElementById("registerForm");
-      const title = document.getElementById("title");
-      if (tab === 'register') {
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
-        title.textContent = texts[currentLang].createAccount;
-      } else {
-        loginForm.style.display = 'block';
-        registerForm.style.display = 'none';
-        title.textContent = texts[currentLang].login;
-      }
-    }
-
-    function openSettings() {
-      const panel = document.getElementById("settingsPanel");
-      panel.style.display = panel.style.display === "none" ? "block" : "none";
-    }
-
-    function changeTheme() {
-      const theme = document.getElementById("themeSelect").value;
-      if (theme === "dark") {
-        document.body.classList.add("dark-theme");
-      } else {
-        document.body.classList.remove("dark-theme");
-      }
-    }
-
-    function changeLanguage() {
-      currentLang = document.getElementById("langSelect").value;
-      document.getElementById("title").textContent = texts[currentLang].login;
-      document.getElementById("username").placeholder = texts[currentLang].username;
-      document.getElementById("password").placeholder = texts[currentLang].password;
-      document.querySelectorAll("button")[0].textContent = texts[currentLang].login;
-      document.querySelectorAll("button")[1].textContent = texts[currentLang].createAccount;
-      document.querySelectorAll("button")[3].textContent = texts[currentLang].back;
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
