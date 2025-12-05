@@ -1,40 +1,152 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <title>แดชบอร์ด</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100vh;
-    }
-    button {
-      padding: 10px;
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h1>ยินดีต้อนรับ, <span id="user"></span>!</h1>
-  <button onclick="logout()">ออกจากระบบ</button>
+/* Reset เบื้องต้น */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sarabun', sans-serif;
+}
 
-  <script>
-    const username = localStorage.getItem("currentUser");
-    if (!username) {
-      location.href = "index.html";
-    }
-    document.getElementById("user").textContent = username;
+body {
+    background-color: #f4f7f8;
+    color: #333;
+}
 
-    function logout() {
-      localStorage.removeItem("currentUser");
-      location.href = "index.html";
+/* Header */
+header {
+    background-color: #0069e0;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background-color: white;
+    color: #008cff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background-color: #0084ff;
+    color: white;
+}
+
+.tab-btn.active {
+    background-color: #ffffff;
+    color: #008cff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Main content */
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Profile members grid */
+#profile {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.member {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.member img.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.member h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.member .role {
+    font-size: 0.95rem;
+    color: #777;
+}
+
+/* Activities */
+#activities {
+    display: none; /* ซ่อนเริ่มต้น */
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#activities h2 {
+    color: #008cff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.activity-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.activity-list li {
+    background-color: #99daff;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.activity-list li:hover {
+    background-color: #97cefc;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .tab-btn {
+        flex: 1 1 45%;
     }
-  </script>
-</body>
-</html>
+
+    .member img.avatar {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .tab-btn {
+        flex: 1 1 100%;
+    }
+}
